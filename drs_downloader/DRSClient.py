@@ -1,18 +1,11 @@
 import requests
 import json
 import re
-
-
+import aiohttp
+import asyncio
 
 class DRSClient:
 	def __init__(self, api_url_base, access_id=None, public=False, debug=False):
-		'''Initialize a DRS Client for the service at the specified url base
-		api_url_base
-		access_id  the default access id to use when obtaining a URL for a  given object id
-		public an indicator that the data to be accessed through this client is public, adn that suthentication is not required
-	 -boolean
-	 debug - whether debug level informstion should be printed
-		'''
 		self.api_url_base = api_url_base
 		self.access_id = access_id
 		self.debug = None #debug
@@ -31,20 +24,44 @@ class DRSClient:
 		else:
 			headers ={}
 
-		api_url = '{0}/access/{1}'.format(object_id, access_id)
-		if self.debug:
-			print(api_url)
-		
-		response = requests.get(api_url, headers=headers)
-		if self.debug: print(response)
-		if response.status_code == 200:
-			resp = response.content.decode('utf-8')
-			return json.loads(resp)['url']
-		if response.status_code == 401:
-			print('Unauthorized for that DRS id')
-			return None
-		else:
-			print(response)
-			print(response.content)
-			return None
+		responses = asyncio.run(main(object_id,headers))
+		print(responses)
+		return responses
 
+
+async def get_more(session,url):
+   # try:
+	async with session.get(url) as response:
+		resp = await response.json(content_type=None)
+		print(resp['url'])
+		return resp['url']
+
+   #except Exception as e:
+    #    print("Unable to get url {} due to {} and {}.".format(url, e.__class__,e))
+
+
+async def main(urls,headers):
+    connector = aiohttp.TCPConnector(limit=10)
+    session_timeout =   aiohttp.ClientTimeout(total=150,sock_connect=100,sock_read=100)
+    async with aiohttp.ClientSession(headers=headers,connector=connector) as session:
+        for url in urls:
+            ret = await asyncio.gather(*[get_more(session,url)])
+        return ret 
+
+
+
+
+#for res in object_id:
+			#response = requests.get(res, headers=headers)
+			#if response.status_code == 200:
+				#resp = response.content.decode('utf-8')
+				#resp = json.loads(resp)['url']
+				#responses.append(resp)
+				#print(response)
+#
+			#if response.status_code == 401:
+				#print('Unauthorized for that DRS id')
+				#continue
+			#else:
+				#print("DRS id failed to be signed in some other way")
+				#continue
