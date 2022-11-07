@@ -1,6 +1,4 @@
 import click
-import requests
-import json
 import async_downloader.download as async_downloader
 from pathlib import Path
 import os
@@ -8,11 +6,10 @@ from DRSClient import DRSClient
 import pandas as pd
 import aiohttp
 import asyncio
-import time
 import logging 
 import subprocess
-from tqdm import tqdm
-import collections
+import tqdm.asyncio
+import time
 """
 logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
@@ -53,11 +50,18 @@ def duplicate_names(names):
     else:
         return False
 
-def Extract_TSV_Information(Tsv_Path,duplicateflag):
+def Extract_TSV_Information(Tsv_Path,duplicateflag,batchsize):
     urls = []
     md5s_and_sizes = []
     names = [] 
     df = pd.read_csv(Tsv_Path,sep = '\t')
+    
+    max_files = subprocess.check_output(["ulimit" ,"-n"]).decode("ascii")[0:-1]
+
+    if(int(max_files) < int(batchsize)):
+       raise Exception("The batch size that you have chosen is ",batchsize,\
+            "your system only allows batchsizes of", max_files , " change the --batchsize flag to less than ",max_files,"to resolve this issue.")
+
     if('pfb:ga4gh_drs_uri' in df.columns.values.tolist()):
         for i in range(df['pfb:ga4gh_drs_uri'].count()):
             urls.append(df['pfb:ga4gh_drs_uri'][i])
@@ -72,7 +76,7 @@ def Extract_TSV_Information(Tsv_Path,duplicateflag):
         raise KeyError("Key format is bad do either pfb:ga4gh_drs_uri or ga4gh_drs_uri")
 
     
-    if (duplicate_names(names) != False and (duplicateflag=="FILE" or duplicateflag=="NAME")):
+    if (duplicate_names(names) != False and (duplicateflag=="FOLDER" or duplicateflag=="NAME")):
         name_problems, numbers =duplicate_names(names)
 
     elif(duplicateflag == "NONE" and duplicate_names(names) != False):
@@ -85,20 +89,43 @@ def Extract_TSV_Information(Tsv_Path,duplicateflag):
 
     return urls,md5s_and_sizes,numbers
 
-async def get_more(session,uri,url_endpoint):
+async def get_more(session,uri,url_endpoint,verbose):
+    
     data = '{ "url": "'+uri+'", "fields": ["fileName", "size", "hashes", "accessUrl"]}'
     async with session.post(url=url_endpoint,data=data) as response:
-        resp = await response.json(content_type=None)
+        resp = await response.json(content_type=None) # content_type=None
+        
+        if( resp == None):
+            return
+        if (resp['fileName'] == None):
+            print("A NONE TYPE HAS BEEN UNCOVERED")
+            return 
+        if (resp['accessUrl'] == None):
+            print("A NONE TYPE URL HAS BEEN PASSED")
+            return
+        if (verbose == "YES"):
+            print(resp['fileName']," has been successfully signed")
         return resp['accessUrl']['url']
 
-async def get_signed_uris(uris):
-    conn = aiohttp.TCPConnector(limit=None)
+async def get_signed_uris(uris,verbose,simulsign):
+    #For people trying to speed up the signing rate over the specified limit
+    if(int(simulsign) > 10):
+        simulsign= 10
+
+    conn = aiohttp.TCPConnector(limit=simulsign)
+    session_timeout =   aiohttp.ClientTimeout(total=1500)
+
+    var = [] 
     url_endpoint = "https://us-central1-broad-dsde-prod.cloudfunctions.net/martha_v3"
     token = subprocess.check_output(["gcloud" ,"auth" ,"print-access-token"]).decode("ascii")[0:-1]
     header = {'authorization': 'Bearer '+token, 'content-type': 'application/json'}
-    async with aiohttp.ClientSession(headers=header ,connector= conn) as session:
-        ret = await asyncio.gather(*[get_more(session,uri,url_endpoint) for uri in tqdm(uris)])
-        return ret 
+    async with aiohttp.ClientSession(trust_env = True ,headers=header ,connector= conn,timeout=session_timeout) as session:
+        for f in tqdm.asyncio.tqdm.as_completed([get_more(session,uri,url_endpoint,verbose) for uri in uris]):
+            var.append(await f)
+        #ret = await asyncio.gather(*[get_more(session,uri,url_endpoint,verbose) for uri in uris])
+    #print(var)
+    #exit()
+    return var
 
 
     #duplicateflag="FILE"
@@ -107,15 +134,21 @@ async def get_signed_uris(uris):
     #Download_Files(tsvname,outputfile,duplicateflag)
 
 @click.command()
-@click.option('--duplicateflag', default="NONE", show_default=True, help='The first number of lines to display.')
-@click.option('--tsvname', default=None, show_default=True, help='The last last number of lines to display.')
-@click.option('--outputfile', default=None, show_default=True, help='The number of lines to skip before displaying.')
-def Download_Files(duplicateflag,tsvname,outputfile):
-    drs_ids, md5s_and_sizes,numbers= Extract_TSV_Information(tsvname,duplicateflag)
+@click.option('--duplicateflag', default="NONE", show_default=True, help='add --duplicateflag "NAME" to rename duplicates like untitiled_file(1) or --duplicateflag "FOLDER" \
+to put every file downloaded into their own folder')
+@click.option('--tsvname', default=None, show_default=True, help='The neame of the TSV file that you are downloading files from in quotations for example --tsvname "example.tsv" ')
+@click.option('--outputfile', default=None, show_default=True, help='The file path of the output file to download to. Relative or Absolute')
+@click.option('--batchsize', default=200, show_default=True, help='The number of files to download in a batch. For example --batchsize 500')
+@click.option('--verbose', default=None, show_default=True, help='Displays every successful URL signing and Download happening in real time. Use --verbose "Yes" to display it')
+@click.option('--simulsign', default=10, show_default=True, help='The amount of URLs to be signed at the same time. For example --simulsign 10 is the maxmimum for this argument')
+# looking for ways to throttle download speed/ efficiency could useful for some people
+#@click.option('--simuldown', default=None, show_default=True, help='The number of files to be downloaded at the same time. For example --simuldown None is the maxmimum for this argument')
+def Download_Files(duplicateflag,tsvname,outputfile,batchsize,verbose,simulsign):
+    drs_ids, md5s_and_sizes,numbers= Extract_TSV_Information(tsvname,duplicateflag,batchsize)
     print("Signing URIS")
-    urls = asyncio.run(get_signed_uris(drs_ids))
+    urls = asyncio.run(get_signed_uris(drs_ids,verbose,simulsign))
 
-    if (numbers != False and (duplicateflag=="FILE" or duplicateflag=="NAME")):
+    if (numbers != False and (duplicateflag=="FOLDER" or duplicateflag=="NAME")):
         name_problems_catalogued,urls,md5s_and_sizes = seperate_conflicts(numbers,urls,md5s_and_sizes)
 
     print("Downloading URLS")
@@ -123,6 +156,8 @@ def Download_Files(duplicateflag,tsvname,outputfile):
     name_problem_download_obj= [] 
 
     for url in urls:
+        if url == None:
+            continue
         download_url_bundle = async_downloader.DownloadURL(url,md5s_and_sizes[urls.index(url)][0],md5s_and_sizes[urls.index(url)][1])
         download_obj.append(download_url_bundle)
 
@@ -134,27 +169,42 @@ def Download_Files(duplicateflag,tsvname,outputfile):
     if(not Path(str(outputfile)).exists() and not os.path.exists(outputfile)):
         print("The path that you specified did not exist so the directory was made in your current working directory")
         os.mkdir(str(outputfile))
+    #If the average size is > 500 MB go one at a time downloading? 
+    total_size=0
 
-    if(numbers == False):
-        async_downloader.download(download_obj, Path(str(outputfile)),duplicateflag)
+    #if the average file size is greater than 500MB dow
+    for i in range(len(download_obj)):
+        total_size= total_size+ download_obj[i].size
+    total_size/=len(download_obj)
+ 
+    if(total_size > (500 * 1024 ** 2)):
+        batchsize =1
+
+    if(duplicateflag != "FOLDER"):
+        batches = 0
+        while(batches<len(download_obj)):
+            if(batches+batchsize>len(download_obj)):
+                end = -1
+            else:
+                end = batches+batchsize
+            async_downloader.download(download_obj[batches:end], Path(str(outputfile)),duplicateflag,verbose)
+            batches=batches+batchsize
+
+        
+    #if there are more than 3000 duplicates this could easily become a problem since batching is not happening here yet.
+    if(numbers != False and duplicateflag == "NAME"):
+        print("Resolving duplicates by downloading each file into it's own folder")
+        async_downloader.download(name_problem_download_obj, Path(str(outputfile)),duplicateflag,verbose)
         return
 
-    elif(numbers != False and duplicateflag == "NAME"):
-        duplicateflag="NONE"
-        async_downloader.download(download_obj, Path(str(outputfile)),duplicateflag)
-        duplicateflag="NAME"
-        async_downloader.download(name_problem_download_obj, Path(str(outputfile)),duplicateflag)
+    elif(numbers != False and duplicateflag  == "FOLDER"):
+        async_downloader.download(name_problem_download_obj, Path(str(outputfile)),duplicateflag,verbose)
         return
 
-    elif(numbers != False and duplicateflag  == "FILE"):
-        async_downloader.download(download_obj, Path(str(outputfile)),Name_Flag="FILE")
-        return
-
-    raise Exception("How did we get here?")
 
 if __name__ == '__main__':
     Download_Files()
-
+ 
     
 
 
