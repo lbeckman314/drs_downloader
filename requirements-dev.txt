@@ -6,5 +6,6 @@ pytest-cov
 mkdocs-section-index
 mkdocs-gen-files
 mkdocs-material
+mkdocs-literate-nav
 mkdocstrings[python]
 version
