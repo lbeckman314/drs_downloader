@@ -1,0 +1,3059 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>manager - AnVIL DRS Download Tool</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="None" data-md-color-accent="None">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#drs_downloader.manager" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="AnVIL DRS Download Tool" class="md-header__button md-logo" aria-label="AnVIL DRS Download Tool" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AnVIL DRS Download Tool
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              manager
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="AnVIL DRS Download Tool" class="md-nav__button md-logo" aria-label="AnVIL DRS Download Tool" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    AnVIL DRS Download Tool
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        DRS Downloader <!-- omit from toc -->
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development.html" class="md-nav__link">
+        Development
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="index.html">drs_downloader</a>
+          
+            <label for="__nav_3_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="drs_downloader" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          drs_downloader
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cli.html" class="md-nav__link">
+        cli
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1_2" type="checkbox" id="__nav_3_1_2" >
+      
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="clients/index.html">clients</a>
+          
+            <label for="__nav_3_1_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="clients" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          clients
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="clients/gen3.html" class="md-nav__link">
+        gen3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="clients/mock.html" class="md-nav__link">
+        mock
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="clients/terra.html" class="md-nav__link">
+        terra
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          manager
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="manager.html" class="md-nav__link md-nav__link--active">
+        manager
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#drs_downloader.manager" class="md-nav__link">
+    drs_downloader.manager
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager" class="md-nav__link">
+    DrsAsyncManager
+  </a>
+  
+    <nav class="md-nav" aria-label="DrsAsyncManager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager.check_existing_parts" class="md-nav__link">
+    check_existing_parts()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager.chunker" class="md-nav__link">
+    chunker()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager.download" class="md-nav__link">
+    download()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager.filter_existing_files" class="md-nav__link">
+    filter_existing_files()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager.get_objects" class="md-nav__link">
+    get_objects()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager.optimize_workload" class="md-nav__link">
+    optimize_workload()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsManager" class="md-nav__link">
+    DrsManager
+  </a>
+  
+    <nav class="md-nav" aria-label="DrsManager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsManager.download" class="md-nav__link">
+    download()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsManager.get_objects" class="md-nav__link">
+    get_objects()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsManager.optimize_workload" class="md-nav__link">
+    optimize_workload()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drs_downloader.manager.Wrapped" class="md-nav__link">
+    Wrapped
+  </a>
+  
+    <nav class="md-nav" aria-label="Wrapped">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.Wrapped.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="models.html" class="md-nav__link">
+        models
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="upgrader.html" class="md-nav__link">
+        upgrader
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#drs_downloader.manager" class="md-nav__link">
+    drs_downloader.manager
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager" class="md-nav__link">
+    DrsAsyncManager
+  </a>
+  
+    <nav class="md-nav" aria-label="DrsAsyncManager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager.check_existing_parts" class="md-nav__link">
+    check_existing_parts()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager.chunker" class="md-nav__link">
+    chunker()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager.download" class="md-nav__link">
+    download()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager.filter_existing_files" class="md-nav__link">
+    filter_existing_files()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager.get_objects" class="md-nav__link">
+    get_objects()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsAsyncManager.optimize_workload" class="md-nav__link">
+    optimize_workload()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsManager" class="md-nav__link">
+    DrsManager
+  </a>
+  
+    <nav class="md-nav" aria-label="DrsManager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsManager.download" class="md-nav__link">
+    download()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsManager.get_objects" class="md-nav__link">
+    get_objects()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.DrsManager.optimize_workload" class="md-nav__link">
+    optimize_workload()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drs_downloader.manager.Wrapped" class="md-nav__link">
+    Wrapped
+  </a>
+  
+    <nav class="md-nav" aria-label="Wrapped">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drs_downloader.manager.Wrapped.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>manager</h1>
+
+<div class="doc doc-object doc-module">
+
+
+<a id="drs_downloader.manager"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="drs_downloader.manager.DrsAsyncManager" class="doc doc-heading">
+        <code>DrsAsyncManager</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code><a class="autorefs autorefs-internal" title="drs_downloader.manager.DrsManager" href="#drs_downloader.manager.DrsManager">DrsManager</a></code></p>
+
+  
+      <p>Manage DRSClient workload with asyncio threads, display progress.</p>
+
+
+        <details class="quote">
+          <summary>Source code in <code>drs_downloader/manager.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span>
+<span class="normal">493</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DrsAsyncManager</span><span class="p">(</span><span class="n">DrsManager</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Manage DRSClient workload with asyncio threads, display progress.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_client</span><span class="p">:</span> <span class="n">DrsClient</span><span class="p">,</span>
+                 <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">part_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_PART_SIZE</span><span class="p">,</span>
+                 <span class="n">max_simultaneous_object_retrievers</span><span class="o">=</span><span class="n">DEFAULT_MAX_SIMULTANEOUS_OBJECT_RETRIEVERS</span><span class="p">,</span>
+                 <span class="n">max_simultaneous_downloaders</span><span class="o">=</span><span class="n">DEFAULT_MAX_SIMULTANEOUS_DOWNLOADERS</span><span class="p">,</span>
+                 <span class="n">max_simultaneous_part_handlers</span><span class="o">=</span><span class="n">DEFAULT_MAX_SIMULTANEOUS_PART_HANDLERS</span><span class="p">,</span>
+                 <span class="n">max_simultaneous_object_signers</span><span class="o">=</span><span class="n">DEFAULT_MAX_SIMULTANEOUS_OBJECT_SIGNERS</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            drs_client: the client that will interact with server</span>
+<span class="sd">            show_progress: show progress bars</span>
+<span class="sd">            part_size: tweak to optimize workload</span>
+<span class="sd">            max_simultaneous_object_retrievers: tweak to optimize workload</span>
+<span class="sd">            max_simultaneous_downloaders: tweak to optimize workload</span>
+<span class="sd">            max_simultaneous_part_handlers: tweak to optimize workload</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># &quot;&quot;&quot;Implements abstract constructor.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">drs_client</span><span class="o">=</span><span class="n">drs_client</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_object_retrievers</span> <span class="o">=</span> <span class="n">max_simultaneous_object_retrievers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_object_signers</span> <span class="o">=</span> <span class="n">max_simultaneous_object_signers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_downloaders</span> <span class="o">=</span> <span class="n">max_simultaneous_downloaders</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span> <span class="o">=</span> <span class="n">max_simultaneous_part_handlers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disable</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">show_progress</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span> <span class="o">=</span> <span class="n">part_size</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_parts_generator</span><span class="p">(</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">part_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Determine the start,size for each part</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            size: size of file</span>
+<span class="sd">            start: offset into file 0 based</span>
+<span class="sd">            part_size: desired part size</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            iterator of tuple start, size</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">while</span> <span class="n">size</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">part_size</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">start</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="n">part_size</span>
+            <span class="n">start</span> <span class="o">+=</span> <span class="n">part_size</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="c1"># start += part_size</span>
+        <span class="k">yield</span> <span class="n">start</span><span class="p">,</span> <span class="n">size</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_run_download_parts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_object</span><span class="p">:</span> <span class="n">DrsObject</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DrsObject</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Determine number of parts for signed url and create tasks for each part, run them in batches.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            drs_object: Information about a bucket object</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list of paths to files for each part, in order.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># create a list of parts</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parts_generator</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">drs_object</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">part_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">part_size</span><span class="p">):</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">start</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Warning: tasks &gt; 1000 </span><span class="si">{</span><span class="n">drs_object</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> has over 1000 parts and is a large download. </span><span class="se">\</span>
+<span class="s1">                (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">drs_object</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">MB</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">disable</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">disable</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="n">paths</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># TODO - tqdm ugly here?</span>
+        <span class="k">for</span> <span class="n">chunk_parts</span> <span class="ow">in</span> \
+                <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">DrsAsyncManager</span><span class="o">.</span><span class="n">chunker</span><span class="p">(</span><span class="n">parts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span><span class="p">),</span>
+                          <span class="n">total</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span><span class="p">),</span>
+                          <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;File Download Progress&quot;</span><span class="p">,</span>
+                          <span class="n">leave</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                          <span class="n">disable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">disable</span><span class="p">):</span>
+            <span class="n">chunk_tasks</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">existing_chunks</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">chunk_parts</span><span class="p">:</span>
+                <span class="c1"># TODO: Check if part file exists and if so verify the expected size.</span>
+                <span class="c1"># If size matches the expected value then return the Path of the file_name for eventual reassembly.</span>
+                <span class="c1"># If size does not match then attempt to restart the download.</span>
+                <span class="n">file_name</span> <span class="o">=</span> <span class="n">destination_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">drs_object</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">start</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s1">.part&#39;</span>
+                <span class="n">file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">check_existing_parts</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">size</span><span class="p">)):</span>
+                    <span class="n">existing_chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="n">task</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_drs_client</span><span class="o">.</span><span class="n">download_part</span><span class="p">(</span><span class="n">drs_object</span><span class="o">=</span><span class="n">drs_object</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+                                                                          <span class="n">destination_path</span><span class="o">=</span><span class="n">destination_path</span><span class="p">))</span>
+                <span class="n">chunk_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+
+            <span class="n">chunk_paths</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="k">await</span> <span class="n">f</span>
+                <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span>
+                <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">chunk_tasks</span><span class="p">),</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">chunk_tasks</span><span class="p">),</span> <span class="n">leave</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                          <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;    * </span><span class="si">{</span><span class="n">drs_object</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> Part&quot;</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">disable</span><span class="p">)</span>
+            <span class="p">]</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">existing_chunks</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">drs_object</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> had </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">existing_chunks</span><span class="p">)</span><span class="si">}</span><span class="s2"> existing parts.&quot;</span><span class="p">)</span>
+
+            <span class="n">chunk_paths</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">existing_chunks</span><span class="p">)</span>
+            <span class="c1"># something bad happened</span>
+            <span class="k">if</span> <span class="kc">None</span> <span class="ow">in</span> <span class="n">chunk_paths</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">drs_object</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> had missing part.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">drs_object</span>
+
+            <span class="n">paths</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">chunk_paths</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="kc">None</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">chunk_paths</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">existing_chunks</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">disable</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> Downloaded sucessfully&quot;</span><span class="p">,</span> <span class="n">drs_object</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="n">drs_object</span><span class="o">.</span><span class="n">file_parts</span> <span class="o">=</span> <span class="n">paths</span>
+
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">drs_object</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span> <span class="ow">or</span> <span class="n">drs_object</span><span class="o">.</span><span class="n">access_methods</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">access_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">original_file_name</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">destination_path</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">filename</span><span class="p">)):</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">original_file_name</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">)&quot;</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">continue</span>
+            <span class="k">break</span>
+
+        <span class="c1"># re-assemble and test the file parts</span>
+        <span class="c1"># hash function dynamic</span>
+        <span class="n">checksum_type</span> <span class="o">=</span> <span class="n">drs_object</span><span class="o">.</span><span class="n">checksums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span>
+        <span class="k">assert</span> <span class="n">checksum_type</span> <span class="ow">in</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">algorithms_available</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Checksum </span><span class="si">{</span><span class="n">checksum_type</span><span class="si">}</span><span class="s2"> not supported.&quot;</span>
+        <span class="n">checksum</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">checksum_type</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">destination_path</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">filename</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">wfd</span><span class="p">:</span>
+            <span class="c1"># sort the items of the list in place - Numerically based on start i.e. &quot;xxxxxx.start.end.part&quot;</span>
+            <span class="n">drs_object</span><span class="o">.</span><span class="n">file_parts</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">]))</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">drs_object</span><span class="o">.</span><span class="n">file_parts</span><span class="p">:</span>
+                <span class="n">fd</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+                <span class="n">wrapped_fd</span> <span class="o">=</span> <span class="n">Wrapped</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">checksum</span><span class="p">)</span>
+                <span class="c1"># efficient way to write</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">wrapped_fd</span><span class="p">,</span> <span class="n">wfd</span><span class="p">)</span>
+                <span class="c1"># explicitly close all</span>
+                <span class="n">wrapped_fd</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="n">fd</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="n">wfd</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="n">actual_checksum</span> <span class="o">=</span> <span class="n">checksum</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+        <span class="n">actual_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">destination_path</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">filename</span><span class="p">)))</span><span class="o">.</span><span class="n">st_size</span>
+
+        <span class="c1"># compare calculated md5 vs expected</span>
+        <span class="n">expected_checksum</span> <span class="o">=</span> <span class="n">drs_object</span><span class="o">.</span><span class="n">checksums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">checksum</span>
+        <span class="k">if</span> <span class="n">expected_checksum</span> <span class="o">!=</span> <span class="n">actual_checksum</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Actual </span><span class="si">{</span><span class="n">checksum_type</span><span class="si">}</span><span class="s2"> hash </span><span class="si">{</span><span class="n">actual_checksum</span><span class="si">}</span><span class="s2"> does not match expected </span><span class="si">{</span><span class="n">expected_checksum</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Actual </span><span class="si">{</span><span class="n">checksum_type</span><span class="si">}</span><span class="s2"> hash </span><span class="si">{</span><span class="n">actual_checksum</span><span class="si">}</span><span class="s2"> does not match expected </span><span class="si">{</span><span class="n">expected_checksum</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">drs_object</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">drs_object</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="n">actual_size</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The actual size </span><span class="si">{</span><span class="n">actual_size</span><span class="si">}</span><span class="s2"> does not match expected size </span><span class="si">{</span><span class="n">drs_object</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">drs_object</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="c1"># if error leave parts in place for now</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">drs_object</span><span class="o">.</span><span class="n">errors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># ok, so clean up file parts</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">drs_object</span><span class="o">.</span><span class="n">file_parts</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">drs_object</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_run_download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_objects</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">],</span> <span class="n">destination_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create tasks to sign and download, display progress.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            drs_objects: list of drs objects to download</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            updated list of drs objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># first sign the urls</span>
+        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">drs_object</span> <span class="ow">in</span> <span class="n">drs_objects</span><span class="p">:</span>
+            <span class="n">task</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_drs_client</span><span class="o">.</span><span class="n">sign_url</span><span class="p">(</span><span class="n">drs_object</span><span class="o">=</span><span class="n">drs_object</span><span class="p">))</span>
+            <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+
+        <span class="n">drs_objects_with_signed_urls</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="k">await</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="c1"># second, download the parts</span>
+        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">drs_object</span> <span class="ow">in</span> <span class="n">drs_objects_with_signed_urls</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">drs_object</span><span class="o">.</span><span class="n">errors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">task</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_run_download_parts</span><span class="p">(</span><span class="n">drs_object</span><span class="o">=</span><span class="n">drs_object</span><span class="p">,</span> <span class="n">destination_path</span><span class="o">=</span><span class="n">destination_path</span><span class="p">))</span>
+                <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">drs_object</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> has error </span><span class="si">{</span><span class="n">drs_object</span><span class="o">.</span><span class="n">errors</span><span class="si">}</span><span class="s2">, not attempting anything further&quot;</span><span class="p">)</span>
+
+        <span class="n">drs_objects_with_file_parts</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="k">await</span> <span class="n">f</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">drs_objects_with_file_parts</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_run_get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">leave</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Create async tasks to retrieve list DrsObject, displays progress.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            object_ids: object_id from manifest</span>
+<span class="sd">            leave: leave flag to keep progress indicator displayed</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">object_id</span> <span class="ow">in</span> <span class="n">object_ids</span><span class="p">:</span>
+            <span class="n">task</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_drs_client</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="n">object_id</span><span class="o">=</span><span class="n">object_id</span><span class="p">))</span>
+            <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+
+        <span class="n">signed_urls</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="k">await</span> <span class="n">f</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">tasks</span><span class="p">),</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">tasks</span><span class="p">),</span> <span class="n">leave</span><span class="o">=</span><span class="n">leave</span><span class="p">,</span>
+                               <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;retrieving object information&quot;</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">disable</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">signed_urls</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">chunker</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">seq</span><span class="p">:</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Iterate over a list in chunks.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            seq: an iterable</span>
+<span class="sd">            size: desired chunk size</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            an iterator that returns lists of size or less</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">seq</span><span class="p">[</span><span class="n">pos</span><span class="p">:</span><span class="n">pos</span> <span class="o">+</span> <span class="n">size</span><span class="p">]</span> <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">),</span> <span class="n">size</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Create tasks for all object_ids, run them in batches, get information about the object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            object_ids: list of objects to fetch</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">drs_objects</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">total_batches</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">object_ids</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_object_retrievers</span><span class="p">)</span>
+        <span class="c1"># rounding</span>
+        <span class="c1"># this would imply that if batch count is 9.3, and you round down the last .3 is never</span>
+        <span class="c1"># actually downloaded since there are only 9 batches. math.ciel would round up if there is a decimal at all</span>
+
+        <span class="n">current</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">chunk_of_object_ids</span> <span class="ow">in</span> <span class="n">DrsAsyncManager</span><span class="o">.</span><span class="n">chunker</span><span class="p">(</span><span class="n">object_ids</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_object_retrievers</span><span class="p">):</span>
+
+            <span class="n">drs_objects</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+                <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_run_get_objects</span><span class="p">(</span><span class="n">object_ids</span><span class="o">=</span><span class="n">chunk_of_object_ids</span><span class="p">,</span> <span class="n">leave</span><span class="o">=</span><span class="p">(</span><span class="n">current</span> <span class="o">==</span> <span class="n">total_batches</span><span class="p">))))</span>
+            <span class="n">current</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">drs_objects</span>
+
+    <span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_objects</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">],</span> <span class="n">destination_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Split the drs_objects into manageable sizes, download the files.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            drs_objects: list of DrsObject</span>
+<span class="sd">            destination_path: directory where to write files when complete</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DrsObjects updated with _file_parts</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">filtered_objects</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_existing_files</span><span class="p">(</span><span class="n">drs_objects</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">,</span> <span class="n">duplicate</span><span class="o">=</span><span class="n">duplicate</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_objects</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">drs_objects</span><span class="p">):</span>
+            <span class="n">complete_objects</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">drs_objects</span> <span class="k">if</span> <span class="n">obj</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">filtered_objects</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">complete_objects</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> already exists in </span><span class="si">{</span><span class="n">destination_path</span><span class="si">}</span><span class="s2">. Skipping download.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_objects</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All DRS objects already present in </span><span class="si">{</span><span class="n">destination_path</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+
+            <span class="n">drs_objects</span> <span class="o">=</span> <span class="n">filtered_objects</span>
+
+        <span class="n">current</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">updated_drs_objects</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">chunk_of_drs_objects</span> <span class="ow">in</span> <span class="n">DrsAsyncManager</span><span class="o">.</span><span class="n">chunker</span><span class="p">(</span><span class="n">drs_objects</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_object_retrievers</span><span class="p">):</span>
+            <span class="n">completed_chunk</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_run_download</span><span class="p">(</span><span class="n">drs_objects</span><span class="o">=</span><span class="n">chunk_of_drs_objects</span><span class="p">,</span>
+                                                             <span class="n">destination_path</span><span class="o">=</span><span class="n">destination_path</span><span class="p">))</span>
+
+            <span class="n">updated_drs_objects</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">completed_chunk</span><span class="p">)</span>
+            <span class="n">current</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">updated_drs_objects</span>
+
+    <span class="k">def</span> <span class="nf">optimize_workload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_objects</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Optimize the workload, sort prioritize and set thread management parameters.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            drs_objects:</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            same list that was passed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Now that we have the objects to download, we have an opportunity to shape the downloads</span>
+        <span class="c1"># e.g. are the smallest files first?  tweak MAX_* to optimize per workload</span>
+
+        <span class="c1"># TODO: If part sizes changed here, would this result in an error in test recovery?</span>
+        <span class="c1"># Test existing captured part if part size changes between runs, either by user or by optimizer.</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">drs_objects</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span> <span class="o">=</span> <span class="mi">50</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span> <span class="o">=</span> <span class="mi">64</span> <span class="o">*</span> <span class="n">MB</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_downloaders</span> <span class="o">=</span> <span class="mi">10</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;part_size=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="kc">True</span> <span class="k">for</span> <span class="n">drs_object</span> <span class="ow">in</span> <span class="n">drs_objects</span> <span class="k">if</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">drs_object</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">GB</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span> <span class="o">=</span> <span class="mi">10</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span> <span class="o">=</span> <span class="mi">128</span> <span class="o">*</span> <span class="n">MB</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_downloaders</span> <span class="o">=</span> <span class="mi">10</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;part_size=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">all</span><span class="p">((</span><span class="n">drs_object</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">MB</span><span class="p">))</span> <span class="k">for</span> <span class="n">drs_object</span> <span class="ow">in</span> <span class="n">drs_objects</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">MB</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_downloaders</span> <span class="o">=</span> <span class="mi">10</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;part_size=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;part_handlers=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">MB</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span> <span class="o">=</span> <span class="mi">10</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_downloaders</span> <span class="o">=</span> <span class="mi">10</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;part_size=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;part_handlers=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">drs_objects</span>
+
+    <span class="k">def</span> <span class="nf">filter_existing_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_objects</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">],</span>
+                              <span class="n">destination_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Remove any DRS objects from a given list if they are already exist in the destination directory.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            drs_objects (List[DrsObject]): The DRS objects from the manifest (some may already be downloaded)</span>
+<span class="sd">            destination_path (Path): Download destination that may contain partially downloaded files</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[DrsObject]: The DRS objects that have yet to be downloaded</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># logger.info(&quot;VALUE OF duplicate %s&quot;,duplicate)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">duplicate</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">drs_objects</span>
+
+        <span class="n">filtered_objects</span> <span class="o">=</span> <span class="p">[</span><span class="n">drs</span> <span class="k">for</span> <span class="n">drs</span> <span class="ow">in</span> <span class="n">drs_objects</span> <span class="k">if</span> <span class="n">drs</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">destination_path</span><span class="p">)]</span>
+
+        <span class="k">return</span> <span class="n">filtered_objects</span>
+
+    <span class="k">def</span> <span class="nf">check_existing_parts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Checks if any file parts have already been downloaded. If a file part was partially downloaded then it</span>
+<span class="sd">           prompts a new download process for that part.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            file_path (Path): Path of the given file part (ex. HG00536.final.cram.crai.1048577.1244278.part)</span>
+<span class="sd">            start (int): Beginning byte of the file part (ex. 1048577)</span>
+<span class="sd">            size (int): Final byte of the file part (ex. 1244278)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if the file part exists in the destination and has the expected file size, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">file_path</span><span class="o">.</span><span class="n">exists</span><span class="p">()):</span>
+            <span class="n">expected_size</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">start</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">start</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">expected_size</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="n">actual_size</span> <span class="o">=</span> <span class="n">file_path</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span>
+            <span class="n">sizes_match</span> <span class="o">=</span> <span class="n">actual_size</span> <span class="o">==</span> <span class="n">expected_size</span>
+            <span class="k">if</span> <span class="n">sizes_match</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">file_path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> exists and has expected size. Skipping download.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="drs_downloader.manager.DrsAsyncManager.__init__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">drs_client</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">part_size</span><span class="o">=</span><span class="n">DEFAULT_PART_SIZE</span><span class="p">,</span> <span class="n">max_simultaneous_object_retrievers</span><span class="o">=</span><span class="n">DEFAULT_MAX_SIMULTANEOUS_OBJECT_RETRIEVERS</span><span class="p">,</span> <span class="n">max_simultaneous_downloaders</span><span class="o">=</span><span class="n">DEFAULT_MAX_SIMULTANEOUS_DOWNLOADERS</span><span class="p">,</span> <span class="n">max_simultaneous_part_handlers</span><span class="o">=</span><span class="n">DEFAULT_MAX_SIMULTANEOUS_PART_HANDLERS</span><span class="p">,</span> <span class="n">max_simultaneous_object_signers</span><span class="o">=</span><span class="n">DEFAULT_MAX_SIMULTANEOUS_OBJECT_SIGNERS</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>drs_client</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="drs_downloader.models.DrsClient" href="models.html#drs_downloader.models.DrsClient">DrsClient</a></code>
+          </td>
+          <td><p>the client that will interact with server</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>show_progress</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>show progress bars</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>part_size</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>tweak to optimize workload</p></td>
+          <td>
+                <code>DEFAULT_PART_SIZE</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>max_simultaneous_object_retrievers</code></td>
+          <td>
+          </td>
+          <td><p>tweak to optimize workload</p></td>
+          <td>
+                <code>DEFAULT_MAX_SIMULTANEOUS_OBJECT_RETRIEVERS</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>max_simultaneous_downloaders</code></td>
+          <td>
+          </td>
+          <td><p>tweak to optimize workload</p></td>
+          <td>
+                <code>DEFAULT_MAX_SIMULTANEOUS_DOWNLOADERS</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>max_simultaneous_part_handlers</code></td>
+          <td>
+          </td>
+          <td><p>tweak to optimize workload</p></td>
+          <td>
+                <code>DEFAULT_MAX_SIMULTANEOUS_PART_HANDLERS</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>drs_downloader/manager.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_client</span><span class="p">:</span> <span class="n">DrsClient</span><span class="p">,</span>
+             <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+             <span class="n">part_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_PART_SIZE</span><span class="p">,</span>
+             <span class="n">max_simultaneous_object_retrievers</span><span class="o">=</span><span class="n">DEFAULT_MAX_SIMULTANEOUS_OBJECT_RETRIEVERS</span><span class="p">,</span>
+             <span class="n">max_simultaneous_downloaders</span><span class="o">=</span><span class="n">DEFAULT_MAX_SIMULTANEOUS_DOWNLOADERS</span><span class="p">,</span>
+             <span class="n">max_simultaneous_part_handlers</span><span class="o">=</span><span class="n">DEFAULT_MAX_SIMULTANEOUS_PART_HANDLERS</span><span class="p">,</span>
+             <span class="n">max_simultaneous_object_signers</span><span class="o">=</span><span class="n">DEFAULT_MAX_SIMULTANEOUS_OBJECT_SIGNERS</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        drs_client: the client that will interact with server</span>
+<span class="sd">        show_progress: show progress bars</span>
+<span class="sd">        part_size: tweak to optimize workload</span>
+<span class="sd">        max_simultaneous_object_retrievers: tweak to optimize workload</span>
+<span class="sd">        max_simultaneous_downloaders: tweak to optimize workload</span>
+<span class="sd">        max_simultaneous_part_handlers: tweak to optimize workload</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># &quot;&quot;&quot;Implements abstract constructor.&quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">drs_client</span><span class="o">=</span><span class="n">drs_client</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_object_retrievers</span> <span class="o">=</span> <span class="n">max_simultaneous_object_retrievers</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_object_signers</span> <span class="o">=</span> <span class="n">max_simultaneous_object_signers</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_downloaders</span> <span class="o">=</span> <span class="n">max_simultaneous_downloaders</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span> <span class="o">=</span> <span class="n">max_simultaneous_part_handlers</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">disable</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">show_progress</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span> <span class="o">=</span> <span class="n">part_size</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="drs_downloader.manager.DrsAsyncManager.check_existing_parts" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">check_existing_parts</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Checks if any file parts have already been downloaded. If a file part was partially downloaded then it
+   prompts a new download process for that part.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>file_path</code></td>
+          <td>
+                <code><span title="pathlib.Path">Path</span></code>
+          </td>
+          <td><p>Path of the given file part (ex. HG00536.final.cram.crai.1048577.1244278.part)</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>start</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Beginning byte of the file part (ex. 1048577)</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Final byte of the file part (ex. 1244278)</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>bool</code></td>          <td>
+                <code>bool</code>
+          </td>
+          <td><p>True if the file part exists in the destination and has the expected file size, False otherwise</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>drs_downloader/manager.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span>
+<span class="normal">493</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">check_existing_parts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Checks if any file parts have already been downloaded. If a file part was partially downloaded then it</span>
+<span class="sd">       prompts a new download process for that part.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_path (Path): Path of the given file part (ex. HG00536.final.cram.crai.1048577.1244278.part)</span>
+<span class="sd">        start (int): Beginning byte of the file part (ex. 1048577)</span>
+<span class="sd">        size (int): Final byte of the file part (ex. 1244278)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True if the file part exists in the destination and has the expected file size, False otherwise</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">file_path</span><span class="o">.</span><span class="n">exists</span><span class="p">()):</span>
+        <span class="n">expected_size</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">start</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">start</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">expected_size</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">actual_size</span> <span class="o">=</span> <span class="n">file_path</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span>
+        <span class="n">sizes_match</span> <span class="o">=</span> <span class="n">actual_size</span> <span class="o">==</span> <span class="n">expected_size</span>
+        <span class="k">if</span> <span class="n">sizes_match</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">file_path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> exists and has expected size. Skipping download.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="drs_downloader.manager.DrsAsyncManager.chunker" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">chunker</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Iterate over a list in chunks.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>seq</code></td>
+          <td>
+                <code><span title="typing.Collection">Collection</span></code>
+          </td>
+          <td><p>an iterable</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>desired chunk size</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.Iterator">Iterator</span></code>
+          </td>
+          <td><p>an iterator that returns lists of size or less</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>drs_downloader/manager.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">chunker</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">seq</span><span class="p">:</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Iterate over a list in chunks.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        seq: an iterable</span>
+<span class="sd">        size: desired chunk size</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        an iterator that returns lists of size or less</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">seq</span><span class="p">[</span><span class="n">pos</span><span class="p">:</span><span class="n">pos</span> <span class="o">+</span> <span class="n">size</span><span class="p">]</span> <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">),</span> <span class="n">size</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="drs_downloader.manager.DrsAsyncManager.download" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">download</span><span class="p">(</span><span class="n">drs_objects</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">,</span> <span class="n">duplicate</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Split the drs_objects into manageable sizes, download the files.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>drs_objects</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="drs_downloader.models.DrsObject" href="models.html#drs_downloader.models.DrsObject">DrsObject</a>]</code>
+          </td>
+          <td><p>list of DrsObject</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>destination_path</code></td>
+          <td>
+                <code><span title="pathlib.Path">Path</span></code>
+          </td>
+          <td><p>directory where to write files when complete</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="drs_downloader.models.DrsObject" href="models.html#drs_downloader.models.DrsObject">DrsObject</a>]</code>
+          </td>
+          <td><p>DrsObjects updated with _file_parts</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>drs_downloader/manager.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_objects</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">],</span> <span class="n">destination_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Split the drs_objects into manageable sizes, download the files.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        drs_objects: list of DrsObject</span>
+<span class="sd">        destination_path: directory where to write files when complete</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        DrsObjects updated with _file_parts</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">filtered_objects</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_existing_files</span><span class="p">(</span><span class="n">drs_objects</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">,</span> <span class="n">duplicate</span><span class="o">=</span><span class="n">duplicate</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_objects</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">drs_objects</span><span class="p">):</span>
+        <span class="n">complete_objects</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">drs_objects</span> <span class="k">if</span> <span class="n">obj</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">filtered_objects</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">complete_objects</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> already exists in </span><span class="si">{</span><span class="n">destination_path</span><span class="si">}</span><span class="s2">. Skipping download.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_objects</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All DRS objects already present in </span><span class="si">{</span><span class="n">destination_path</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">drs_objects</span> <span class="o">=</span> <span class="n">filtered_objects</span>
+
+    <span class="n">current</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">updated_drs_objects</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">chunk_of_drs_objects</span> <span class="ow">in</span> <span class="n">DrsAsyncManager</span><span class="o">.</span><span class="n">chunker</span><span class="p">(</span><span class="n">drs_objects</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_object_retrievers</span><span class="p">):</span>
+        <span class="n">completed_chunk</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_run_download</span><span class="p">(</span><span class="n">drs_objects</span><span class="o">=</span><span class="n">chunk_of_drs_objects</span><span class="p">,</span>
+                                                         <span class="n">destination_path</span><span class="o">=</span><span class="n">destination_path</span><span class="p">))</span>
+
+        <span class="n">updated_drs_objects</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">completed_chunk</span><span class="p">)</span>
+        <span class="n">current</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">updated_drs_objects</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="drs_downloader.manager.DrsAsyncManager.filter_existing_files" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">filter_existing_files</span><span class="p">(</span><span class="n">drs_objects</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">,</span> <span class="n">duplicate</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Remove any DRS objects from a given list if they are already exist in the destination directory.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>drs_objects</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="drs_downloader.models.DrsObject" href="models.html#drs_downloader.models.DrsObject">DrsObject</a>]</code>
+          </td>
+          <td><p>The DRS objects from the manifest (some may already be downloaded)</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>destination_path</code></td>
+          <td>
+                <code><span title="pathlib.Path">Path</span></code>
+          </td>
+          <td><p>Download destination that may contain partially downloaded files</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="drs_downloader.models.DrsObject" href="models.html#drs_downloader.models.DrsObject">DrsObject</a>]</code>
+          </td>
+          <td><p>List[DrsObject]: The DRS objects that have yet to be downloaded</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>drs_downloader/manager.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">filter_existing_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_objects</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">],</span>
+                          <span class="n">destination_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">duplicate</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Remove any DRS objects from a given list if they are already exist in the destination directory.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        drs_objects (List[DrsObject]): The DRS objects from the manifest (some may already be downloaded)</span>
+<span class="sd">        destination_path (Path): Download destination that may contain partially downloaded files</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[DrsObject]: The DRS objects that have yet to be downloaded</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># logger.info(&quot;VALUE OF duplicate %s&quot;,duplicate)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">duplicate</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">drs_objects</span>
+
+    <span class="n">filtered_objects</span> <span class="o">=</span> <span class="p">[</span><span class="n">drs</span> <span class="k">for</span> <span class="n">drs</span> <span class="ow">in</span> <span class="n">drs_objects</span> <span class="k">if</span> <span class="n">drs</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">destination_path</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">filtered_objects</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="drs_downloader.manager.DrsAsyncManager.get_objects" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_objects</span><span class="p">(</span><span class="n">object_ids</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Create tasks for all object_ids, run them in batches, get information about the object.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>object_ids</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[str]</code>
+          </td>
+          <td><p>list of objects to fetch</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>drs_downloader/manager.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Create tasks for all object_ids, run them in batches, get information about the object.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        object_ids: list of objects to fetch</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">drs_objects</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">total_batches</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">object_ids</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_object_retrievers</span><span class="p">)</span>
+    <span class="c1"># rounding</span>
+    <span class="c1"># this would imply that if batch count is 9.3, and you round down the last .3 is never</span>
+    <span class="c1"># actually downloaded since there are only 9 batches. math.ciel would round up if there is a decimal at all</span>
+
+    <span class="n">current</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">chunk_of_object_ids</span> <span class="ow">in</span> <span class="n">DrsAsyncManager</span><span class="o">.</span><span class="n">chunker</span><span class="p">(</span><span class="n">object_ids</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_object_retrievers</span><span class="p">):</span>
+
+        <span class="n">drs_objects</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+            <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_run_get_objects</span><span class="p">(</span><span class="n">object_ids</span><span class="o">=</span><span class="n">chunk_of_object_ids</span><span class="p">,</span> <span class="n">leave</span><span class="o">=</span><span class="p">(</span><span class="n">current</span> <span class="o">==</span> <span class="n">total_batches</span><span class="p">))))</span>
+        <span class="n">current</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">drs_objects</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="drs_downloader.manager.DrsAsyncManager.optimize_workload" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">optimize_workload</span><span class="p">(</span><span class="n">drs_objects</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Optimize the workload, sort prioritize and set thread management parameters.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>drs_objects</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="drs_downloader.models.DrsObject" href="models.html#drs_downloader.models.DrsObject">DrsObject</a>]</code>
+          </td>
+          <td></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="drs_downloader.models.DrsObject" href="models.html#drs_downloader.models.DrsObject">DrsObject</a>]</code>
+          </td>
+          <td><p>same list that was passed</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>drs_downloader/manager.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">optimize_workload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_objects</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Optimize the workload, sort prioritize and set thread management parameters.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        drs_objects:</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        same list that was passed</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Now that we have the objects to download, we have an opportunity to shape the downloads</span>
+    <span class="c1"># e.g. are the smallest files first?  tweak MAX_* to optimize per workload</span>
+
+    <span class="c1"># TODO: If part sizes changed here, would this result in an error in test recovery?</span>
+    <span class="c1"># Test existing captured part if part size changes between runs, either by user or by optimizer.</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">drs_objects</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span> <span class="o">=</span> <span class="mi">50</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span> <span class="o">=</span> <span class="mi">64</span> <span class="o">*</span> <span class="n">MB</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_downloaders</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;part_size=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="kc">True</span> <span class="k">for</span> <span class="n">drs_object</span> <span class="ow">in</span> <span class="n">drs_objects</span> <span class="k">if</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">drs_object</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">GB</span><span class="p">)):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span> <span class="o">=</span> <span class="mi">128</span> <span class="o">*</span> <span class="n">MB</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_downloaders</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;part_size=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">all</span><span class="p">((</span><span class="n">drs_object</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">MB</span><span class="p">))</span> <span class="k">for</span> <span class="n">drs_object</span> <span class="ow">in</span> <span class="n">drs_objects</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">MB</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_downloaders</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;part_size=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;part_handlers=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">MB</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_downloaders</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;part_size=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">part_size</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;part_handlers=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_simultaneous_part_handlers</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">drs_objects</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="drs_downloader.manager.DrsManager" class="doc doc-heading">
+        <code>DrsManager</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code><span title="abc.ABC">ABC</span></code></p>
+
+  
+      <p>Manage DRSClient workload.</p>
+
+
+        <details class="quote">
+          <summary>Source code in <code>drs_downloader/manager.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DrsManager</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Manage DRSClient workload.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_client</span><span class="p">:</span> <span class="n">DrsClient</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_drs_client</span> <span class="o">=</span> <span class="n">drs_client</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Fetch list of DRSObject from passed ids.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            object_ids: list of objects to fetch</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_objects</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">],</span> <span class="n">destination_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Split the drs_objects into manageable parts, download the files.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            drs_objects: objects to download</span>
+<span class="sd">            destination_path: directory where to write files when complete</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list of updated DrsObjects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">optimize_workload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_objects</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Optimize the workload, sort prioritize and set thread management parameters.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            drs_objects:</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># TODO - now that we have the objects to download, we have an opportunity to shape the downloads</span>
+        <span class="c1"># TODO - e.g. smallest files first?  tweak MAX_* to optimize per workload</span>
+        <span class="k">return</span> <span class="n">drs_objects</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="drs_downloader.manager.DrsManager.download" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">download</span><span class="p">(</span><span class="n">drs_objects</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">)</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Split the drs_objects into manageable parts, download the files.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>drs_objects</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="drs_downloader.models.DrsObject" href="models.html#drs_downloader.models.DrsObject">DrsObject</a>]</code>
+          </td>
+          <td><p>objects to download</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>destination_path</code></td>
+          <td>
+                <code><span title="pathlib.Path">Path</span></code>
+          </td>
+          <td><p>directory where to write files when complete</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="drs_downloader.models.DrsObject" href="models.html#drs_downloader.models.DrsObject">DrsObject</a>]</code>
+          </td>
+          <td><p>list of updated DrsObjects</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>drs_downloader/manager.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@abstractmethod</span>
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_objects</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">],</span> <span class="n">destination_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Split the drs_objects into manageable parts, download the files.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        drs_objects: objects to download</span>
+<span class="sd">        destination_path: directory where to write files when complete</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list of updated DrsObjects</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="drs_downloader.manager.DrsManager.get_objects" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_objects</span><span class="p">(</span><span class="n">object_ids</span><span class="p">)</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Fetch list of DRSObject from passed ids.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>object_ids</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[str]</code>
+          </td>
+          <td><p>list of objects to fetch</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>drs_downloader/manager.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@abstractmethod</span>
+<span class="k">def</span> <span class="nf">get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Fetch list of DRSObject from passed ids.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        object_ids: list of objects to fetch</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="drs_downloader.manager.DrsManager.optimize_workload" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">optimize_workload</span><span class="p">(</span><span class="n">drs_objects</span><span class="p">)</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+      <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Optimize the workload, sort prioritize and set thread management parameters.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>drs_objects</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="drs_downloader.models.DrsObject" href="models.html#drs_downloader.models.DrsObject">DrsObject</a>]</code>
+          </td>
+          <td></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>drs_downloader/manager.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@abstractmethod</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">optimize_workload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drs_objects</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DrsObject</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Optimize the workload, sort prioritize and set thread management parameters.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        drs_objects:</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO - now that we have the objects to download, we have an opportunity to shape the downloads</span>
+    <span class="c1"># TODO - e.g. smallest files first?  tweak MAX_* to optimize per workload</span>
+    <span class="k">return</span> <span class="n">drs_objects</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="drs_downloader.manager.Wrapped" class="doc doc-heading">
+        <code>Wrapped</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code>object</code></p>
+
+
+
+        <details class="quote">
+          <summary>Source code in <code>drs_downloader/manager.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span>
+<span class="normal">97</span>
+<span class="normal">98</span>
+<span class="normal">99</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Wrapped</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">hash_method</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wrap the read() method and calculate hash</span>
+<span class="sd">        Args:</span>
+<span class="sd">            file: destination file</span>
+<span class="sd">            hash_method: instantiated hash_method</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="n">file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hash_method</span> <span class="o">=</span> <span class="n">hash_method</span>
+
+    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="n">buffer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hash_method</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">buffer</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="drs_downloader.manager.Wrapped.__init__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">hash_method</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Wrap the read() method and calculate hash</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>file</code></td>
+          <td>
+          </td>
+          <td><p>destination file</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hash_method</code></td>
+          <td>
+          </td>
+          <td><p>instantiated hash_method</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>drs_downloader/manager.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">hash_method</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrap the read() method and calculate hash</span>
+<span class="sd">    Args:</span>
+<span class="sd">        file: destination file</span>
+<span class="sd">        hash_method: instantiated hash_method</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="n">file</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_hash_method</span> <span class="o">=</span> <span class="n">hash_method</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="clients/terra.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: terra" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              terra
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="models.html" class="md-footer__link md-footer__link--next" aria-label="Next: models" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              models
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+    
+    
+  </body>
+</html>
